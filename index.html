@@ -2,7 +2,8 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>세종 카페 가이드 ✨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세종 카페 가이드 ✨</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
 
@@ -11,7 +12,7 @@
             --soft-blue: #E0F2F7;
             --cherry-blossom: #FFB7C5;
             --insta-rose: #E4405F;
-            --naver-green: #03C75A; /* 네이버 상징색 추가 */
+            --naver-green: #03C75A;
             --text-main: #555555;
             --glass-white: rgba(255, 255, 255, 0.7);
         }
@@ -32,11 +33,12 @@
             margin-bottom: 40px;
         }
 
+        /* 메인 타이틀 디자인 */
         header h1 {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem; 
+            font-size: 2.5rem;
             font-weight: 900;
             background: linear-gradient(to right, #FF85A1, #E4405F);
             -webkit-background-clip: text;
@@ -44,6 +46,7 @@
             margin-bottom: 12px;
             gap: 15px;
             text-shadow: 3px 3px 6px rgba(255, 183, 197, 0.3);
+            line-height: 1.2;
         }
 
         header h1 img {
@@ -64,7 +67,38 @@
             font-weight: 600;
         }
 
-        /* --- 추가: 로딩 스피너 디자인 --- */
+        /* ✨ 모바일 전용 스타일 (미디어 쿼리) */
+        @media (max-width: 600px) {
+            body {
+                padding: 40px 15px; /* 모바일 여백 축소 */
+            }
+
+            header h1 {
+                font-size: 1.7rem; /* 제목 크기 대폭 축소 */
+                flex-direction: column; /* 아이콘과 텍스트 세로 배치 */
+                gap: 5px;
+            }
+
+            header h1 img {
+                height: 1.5em; /* 아이콘 비율 조정 */
+            }
+
+            .controls-wrapper {
+                padding: 15px !important;
+                border-radius: 20px !important;
+            }
+
+            .search-container input {
+                padding: 12px 15px !important;
+                font-size: 0.9rem !important;
+            }
+
+            .search-container button {
+                padding: 0 20px !important;
+            }
+        }
+
+        /* 로딩 스피너 */
         .loader-container {
             display: flex;
             flex-direction: column;
@@ -87,8 +121,8 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* ------------------------- */
 
+        /* 컨트롤 영역 */
         .controls-wrapper {
             max-width: 800px;
             margin: 0 auto 50px;
@@ -156,6 +190,7 @@
             color: white;
         }
 
+        /* 카드 디자인 */
         .cafe-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -234,7 +269,6 @@
             line-height: 1.4;
         }
 
-        /* --- 추가: 네이버 지도 버튼 디자인 --- */
         .map-link {
             text-decoration: none;
             background: var(--naver-green);
@@ -248,7 +282,7 @@
             align-items: center;
             justify-content: center;
             gap: 5px;
-            margin-top: auto; /* 카드 하단에 고정 */
+            margin-top: auto;
         }
 
         .map-link:hover {
@@ -309,9 +343,7 @@
             download: true,
             header: true,
             complete: function(results) {
-                // 로딩 숨기기
                 document.getElementById('loader').style.display = 'none';
-                
                 allCafes = results.data.filter(cafe => cafe.name);
                 renderCafes(allCafes);
                 updateCount(`총 ${allCafes.length}곳의 따스한 카페가 기다려요 🌿`);
@@ -327,8 +359,6 @@
             const card = document.createElement('div');
             card.className = 'cafe-card';
             const firstChar = cafe.name.charAt(0);
-            
-            // 네이버 검색 링크 생성
             const mapUrl = `https://map.naver.com/v5/search/${encodeURIComponent(cafe.name + ' ' + cafe.location)}`;
 
             card.innerHTML = `
