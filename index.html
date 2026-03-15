@@ -2,15 +2,16 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>세종 카페 가이드 ✨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>세종 카페 가이드 ✨</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
 
         :root {
-            --soft-pink: #FFDDE2;   /* 배경 핑크 */
-            --soft-blue: #E0F2F7;   /* 배경 하늘색 */
-            --cherry-blossom: #FFB7C5; /* 벚꽃 핑크 */
-            --insta-rose: #E4405F;  /* 인스타 로즈색 */
+            --soft-pink: #FFDDE2;
+            --soft-blue: #E0F2F7;
+            --cherry-blossom: #FFB7C5;
+            --insta-rose: #E4405F;
+            --naver-green: #03C75A; /* 네이버 상징색 추가 */
             --text-main: #555555;
             --glass-white: rgba(255, 255, 255, 0.7);
         }
@@ -31,19 +32,15 @@
             margin-bottom: 40px;
         }
 
-        /* <h1> 디자인 변경: 벚꽃 이미지와 인스타 감성 컬러 */
         header h1 {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem; /* 크기 약간 확대 */
+            font-size: 2.5rem; 
             font-weight: 900;
-            
-            /* 글자에 그라데이션 적용 */
             background: linear-gradient(to right, #FF85A1, #E4405F);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            
             margin-bottom: 12px;
             gap: 15px;
             text-shadow: 3px 3px 6px rgba(255, 183, 197, 0.3);
@@ -52,7 +49,6 @@
         header h1 img {
             height: 1.2em;
             width: auto;
-            /* 벚꽃 이미지의 투명도와 색감을 살리기 위한 필터 */
             filter: drop-shadow(0 0 5px rgba(255, 183, 197, 0.8));
         }
 
@@ -68,7 +64,31 @@
             font-weight: 600;
         }
 
-        /* 나머지 컨트롤 영역 (Glassmorphism 유지) */
+        /* --- 추가: 로딩 스피너 디자인 --- */
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--cherry-blossom);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* ------------------------- */
+
         .controls-wrapper {
             max-width: 800px;
             margin: 0 auto 50px;
@@ -86,7 +106,7 @@
         .search-container {
             display: flex;
             background: white;
-            border-radius: 50px; /* 더 둥글게 */
+            border-radius: 50px;
             margin-bottom: 15px;
             overflow: hidden;
             border: 2px solid var(--soft-pink);
@@ -109,11 +129,6 @@
             font-weight: 900;
             cursor: pointer;
             transition: 0.3s;
-        }
-
-        .search-container button:hover {
-            opacity: 0.8;
-            transform: scale(1.05);
         }
 
         .filter-tags {
@@ -141,7 +156,6 @@
             color: white;
         }
 
-        /* 카드 그리드 및 둥근 카드 디자인 */
         .cafe-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -158,11 +172,9 @@
             padding: 30px;
             position: relative;
             transition: all 0.3s ease;
-            cursor: pointer;
             text-align: center;
             box-shadow: 10px 10px 20px rgba(0,0,0,0.02);
             border: 1px solid rgba(255,255,255,0.8);
-            
             opacity: 0;
             transform: translateY(20px);
         }
@@ -185,7 +197,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: var(--accent-pink);
+            color: #FF85A1;
             font-weight: 900;
             font-size: 1.8rem;
             margin: 0 auto 20px;
@@ -200,24 +212,49 @@
             font-weight: 900;
         }
 
+        .tag-container {
+            margin-bottom: 10px;
+        }
+
         .tag {
             display: inline-block;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             background: #FFF0F3;
-            color: var(--accent-pink);
+            color: #FF85A1;
             padding: 5px 12px;
             font-weight: 700;
             border-radius: 15px;
-            margin-bottom: 5px;
+            margin: 2px;
         }
 
         .cafe-card p {
             font-size: 0.85rem;
-            color: #bbb;
-            margin: 0;
+            color: #999;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
 
-        #info-text { font-weight: 700; color: #FF85A1; }
+        /* --- 추가: 네이버 지도 버튼 디자인 --- */
+        .map-link {
+            text-decoration: none;
+            background: var(--naver-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: auto; /* 카드 하단에 고정 */
+        }
+
+        .map-link:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -247,6 +284,11 @@
     </div>
 </div>
 
+<div id="loader" class="loader-container">
+    <div class="loader"></div>
+    <p>효린수인이의 카페 데이터를 가져오고 있어요... ✨</p>
+</div>
+
 <div class="cafe-grid" id="cafeGrid"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
@@ -267,6 +309,9 @@
             download: true,
             header: true,
             complete: function(results) {
+                // 로딩 숨기기
+                document.getElementById('loader').style.display = 'none';
+                
                 allCafes = results.data.filter(cafe => cafe.name);
                 renderCafes(allCafes);
                 updateCount(`총 ${allCafes.length}곳의 따스한 카페가 기다려요 🌿`);
@@ -282,6 +327,9 @@
             const card = document.createElement('div');
             card.className = 'cafe-card';
             const firstChar = cafe.name.charAt(0);
+            
+            // 네이버 검색 링크 생성
+            const mapUrl = `https://map.naver.com/v5/search/${encodeURIComponent(cafe.name + ' ' + cafe.location)}`;
 
             card.innerHTML = `
                 <div class="cafe-thumb">${firstChar}</div>
@@ -289,14 +337,14 @@
                     <h3>${cafe.name}</h3>
                     <div class="tag-container">
                         <span class="tag">#${cafe.location}</span>
+                        <span class="tag">#세종카페</span>
                     </div>
                     <p>${cafe.address}</p>
+                    <a href="${mapUrl}" target="_blank" class="map-link">
+                        📍 네이버 지도
+                    </a>
                 </div>
             `;
-
-            card.onclick = () => {
-                window.open(`https://map.naver.com/v5/search/${encodeURIComponent(cafe.name + ' ' + cafe.location)}`, '_blank');
-            };
 
             grid.appendChild(card);
             scrollObserver.observe(card);
